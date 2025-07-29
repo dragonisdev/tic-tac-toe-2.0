@@ -2,20 +2,26 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { useGame } from '@/contexts/GameContext';
 import { X, Circle } from 'lucide-react-native';
+import { getResponsiveFontSize, getResponsiveIconSize } from '@/utils/responsiveText';
 
 export default function GameHeader() {
-  const { playerScore, aiScore } = useGame();
+  const { playerScore, aiScore, isOverTheBoard } = useGame();
+  
+  const getGameModeText = () => {
+    return isOverTheBoard ? 'Over the Board Mode' : 'AI Opponent Mode';
+  };
   
   return (
     <View style={styles.header}>
-      <Text style={styles.title}>Tic Tac Toe 2.0</Text>
+      <Text style={styles.title}>{getGameModeText()}</Text>
+      
       <View style={styles.scoreContainer}>
         <View style={styles.scoreItem}>
-          <X size={20} color="#7B68EE" />
+          <X size={getResponsiveIconSize(16, 24)} color="#7B68EE" />
           <Text style={styles.scoreValue}>{playerScore}</Text>
         </View>
         <View style={[styles.scoreItem, styles.aiScore]}>
-          <Circle size={20} color="#FF6B6B" />
+          <Circle size={getResponsiveIconSize(16, 24)} color="#FF6B6B" />
           <Text style={styles.scoreValue}>{aiScore}</Text>
         </View>
       </View>
@@ -29,34 +35,42 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 24,
+    paddingTop: 10,
   },
   title: {
-    fontSize: 28,
+    fontSize: getResponsiveFontSize(28, 36),
     fontWeight: 'bold',
     color: 'white',
     fontFamily: 'Poppins-Bold',
   },
   scoreContainer: {
     flexDirection: 'row',
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: 'rgba(255, 255, 255, 0.12)',
     borderRadius: 16,
     padding: 8,
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.15)',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    elevation: 4,
   },
   scoreItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 12,
-    paddingVertical: 4,
+    paddingHorizontal: 8,
+    paddingVertical: 3,
   },
   aiScore: {
     borderLeftWidth: 1,
     borderLeftColor: 'rgba(255, 255, 255, 0.1)',
   },
   scoreValue: {
-    fontSize: 20,
+    fontSize: getResponsiveFontSize(16, 22),
     fontWeight: 'bold',
     color: 'white',
-    marginLeft: 8,
+    marginLeft: 6,
     fontFamily: 'Poppins-Bold',
   },
 });

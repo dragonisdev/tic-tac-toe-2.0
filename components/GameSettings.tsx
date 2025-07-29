@@ -1,16 +1,10 @@
 import React from 'react';
-import { View, Text, StyleSheet, Switch, Pressable } from 'react-native';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { useGame } from '@/contexts/GameContext';
-import CustomSlider from './Slider';
 
 export default function GameSettings() {
   const { 
     isOverTheBoard,
-    setIsOverTheBoard,
-    boardSize,
-    setBoardSize,
-    winLength,
-    setWinLength,
     resetGame
   } = useGame();
 
@@ -19,44 +13,16 @@ export default function GameSettings() {
       <View style={styles.section}>
         <Text style={styles.label}>Game Mode</Text>
         <View style={styles.switchContainer}>
-          <Text style={styles.switchLabel}>Over the Board</Text>
-          <Switch
-            value={isOverTheBoard}
-            onValueChange={setIsOverTheBoard}
-            trackColor={{ false: '#767577', true: '#81b0ff' }}
-            thumbColor={isOverTheBoard ? '#f5dd4b' : '#f4f3f4'}
-          />
+          <Text style={styles.switchLabel}>
+            {isOverTheBoard ? 'Over the Board Mode' : 'AI Opponent Mode'}
+          </Text>
         </View>
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.label}>Board Size</Text>
-        <CustomSlider
-          value={boardSize}
-          onValueChange={setBoardSize}
-          minimumValue={3}
-          maximumValue={5}
-          step={1}
-          minimumTrackTintColor="#81b0ff"
-          maximumTrackTintColor="#767577"
-          thumbTintColor="#f5dd4b"
-        />
-        <Text style={styles.value}>{boardSize}x{boardSize}</Text>
-      </View>
-
-      <View style={styles.section}>
-        <Text style={styles.label}>Win Length</Text>
-        <CustomSlider
-          value={winLength}
-          onValueChange={setWinLength}
-          minimumValue={3}
-          maximumValue={boardSize}
-          step={1}
-          minimumTrackTintColor="#81b0ff"
-          maximumTrackTintColor="#767577"
-          thumbTintColor="#f5dd4b"
-        />
-        <Text style={styles.value}>{winLength} in a row</Text>
+        <Text style={styles.label}>Game Info</Text>
+        <Text style={styles.value}>3x3 Board</Text>
+        <Text style={styles.value}>3 in a row to win</Text>
       </View>
 
       <Pressable 

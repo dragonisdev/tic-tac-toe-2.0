@@ -13,9 +13,15 @@ import { X, Circle } from 'lucide-react-native';
 import { CellValue } from '@/types/game';
 import { useGame } from '@/contexts/GameContext';
 
-const { width } = Dimensions.get('window');
-const BOARD_PADDING = 16;
-const BOARD_SIZE = Math.min(width - BOARD_PADDING * 2, 350);
+const { width, height } = Dimensions.get('window');
+const BOARD_PADDING = 24;
+const screenDiagonal = Math.sqrt(width * width + height * height);
+const isTablet = screenDiagonal > 1000; // Rough threshold for tablets
+
+// Responsive sizing based on device type
+const MIN_BOARD_SIZE = isTablet ? 400 : 280;
+const MAX_BOARD_SIZE = Math.min(width, height) - BOARD_PADDING * 2;
+const BOARD_SIZE = Math.max(MIN_BOARD_SIZE, Math.min(MAX_BOARD_SIZE, isTablet ? 600 : 400));
 const CELL_SIZE = (BOARD_SIZE - 16) / 3;
 
 interface CellProps {

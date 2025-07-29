@@ -1,0 +1,57 @@
+# Tic Tac Toe Mobile App - Cursor Rules
+
+## Project Overview
+This is a React Native/Expo mobile application for Tic Tac Toe with multiple game modes and features.
+
+## Tech Stack
+- React Native with Expo
+- TypeScript
+- Expo Router for navigation
+- React Context for state management
+- Expo AV for sound effects
+
+## Project Structure
+- `app/` - Expo Router pages and layouts
+- `components/` - Reusable React components
+- `contexts/` - React Context providers for game state and settings
+- `hooks/` - Custom React hooks
+- `types/` - TypeScript type definitions
+- `utils/` - Utility functions and game logic
+- `assets/` - Images and sound files
+
+## Coding Standards
+- Use TypeScript for all new code
+- Follow React Native best practices
+- Use functional components with hooks
+- Implement proper error handling
+- Add TypeScript types for all props and state
+- Use descriptive component and function names
+- Follow the existing file structure and naming conventions
+
+## Key Features
+Two game modes:
+- AI Mode (Player vs. computer with basic logic)
+- Local Multiplayer (two players on the same device)
+- Sound effects for game interactions
+- Settings and configuration
+- Responsive design for different screen sizes
+- Cross-platform (iOS and Android)
+
+## Context for AI Assistance
+- Focus on mobile-first design
+- Consider touch interactions and accessibility
+- Maintain consistent styling with the existing theme
+- Ensure compatibility with Expo SDK
+- Follow React Native performance best practices
+- Consider offline functionality where appropriate
+
+## File Naming Conventions
+- Components: PascalCase (e.g., `GameBoard.tsx`)
+- Utilities: camelCase (e.g., `gameLogic.ts`)
+- Pages: kebab-case (e.g., `game.tsx`)
+- Types: camelCase with descriptive names
+
+## State Management
+- Use React Context for global state (GameContext, SettingsContext)
+- Keep component state local when possible
+- Avoid prop drilling by using context appropriately 

@@ -9,6 +9,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { X, Circle } from 'lucide-react-native';
 import { useGame } from '@/contexts/GameContext';
+import { getResponsiveFontSize, getResponsiveIconSize } from '@/utils/responsiveText';
 
 export default function GameStatus() {
   const { playerTurn, playerMoves, aiMoves, gameState, winningLine, isOverTheBoard } = useGame();
@@ -51,7 +52,7 @@ export default function GameStatus() {
   
   const renderNextToRemoveIndicator = () => {
     const currentMoves = playerTurn ? playerMoves : aiMoves;
-    const symbol = playerTurn ? <X size={20} color="#7B68EE" /> : <Circle size={20} color="#FF6B6B" />;
+    const symbol = playerTurn ? <X size={getResponsiveIconSize(20, 28)} color="#7B68EE" /> : <Circle size={getResponsiveIconSize(20, 28)} color="#FF6B6B" />;
     
     if (currentMoves.length >= 3) {
       return (
@@ -97,16 +98,16 @@ export default function GameStatus() {
         
         <View style={styles.moveCountContainer}>
           <View style={styles.moveCount}>
-            <X size={18} color="#7B68EE" />
+            <X size={getResponsiveIconSize(18, 24)} color="#7B68EE" />
             <Text style={styles.countText}>{playerMoves.length}/3</Text>
           </View>
           <View style={styles.moveCount}>
-            <Circle size={18} color="#FF6B6B" />
+            <Circle size={getResponsiveIconSize(18, 24)} color="#FF6B6B" />
             <Text style={styles.countText}>{aiMoves.length}/3</Text>
           </View>
         </View>
         
-        {renderNextToRemoveIndicator()}
+        
       </View>
     );
   };
@@ -129,7 +130,7 @@ const styles = StyleSheet.create({
     padding: 12,
   },
   turnText: {
-    fontSize: 20,
+    fontSize: getResponsiveFontSize(20, 28),
     fontWeight: 'bold',
     color: 'white',
     textAlign: 'center',
@@ -152,7 +153,7 @@ const styles = StyleSheet.create({
   countText: {
     color: 'white',
     marginLeft: 8,
-    fontSize: 16,
+    fontSize: getResponsiveFontSize(16, 20),
     fontFamily: 'Poppins-Medium',
   },
   nextRemoveContainer: {
@@ -162,7 +163,7 @@ const styles = StyleSheet.create({
   },
   nextRemoveText: {
     color: 'rgba(255, 255, 255, 0.7)',
-    fontSize: 14,
+    fontSize: getResponsiveFontSize(14, 18),
     marginBottom: 4,
     fontFamily: 'Poppins-Regular',
   },
@@ -173,11 +174,11 @@ const styles = StyleSheet.create({
   positionText: {
     color: 'white',
     marginLeft: 8,
-    fontSize: 14,
+    fontSize: getResponsiveFontSize(14, 18),
     fontFamily: 'Poppins-Regular',
   },
   winText: {
-    fontSize: 24,
+    fontSize: getResponsiveFontSize(24, 32),
     fontWeight: 'bold',
     textAlign: 'center',
     fontFamily: 'Poppins-Bold',
@@ -189,7 +190,7 @@ const styles = StyleSheet.create({
     color: '#FF8E8E',
   },
   subText: {
-    fontSize: 14,
+    fontSize: getResponsiveFontSize(14, 18),
     color: 'rgba(255, 255, 255, 0.7)',
     textAlign: 'center',
     marginTop: 4,

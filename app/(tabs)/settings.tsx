@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Switch, Platform, SafeAreaView, ScrollView } fr
 import { useSettings } from '@/contexts/SettingsContext';
 import CustomSlider from '@/components/Slider';
 import { X, Circle } from 'lucide-react-native';
+import { getResponsiveFontSize, getResponsiveIconSize } from '@/utils/responsiveText';
 
 export default function SettingsScreen() {
   const { 
@@ -75,7 +76,7 @@ export default function SettingsScreen() {
           <View style={styles.rule}>
             <Text style={styles.ruleNumber}>1</Text>
             <Text style={styles.ruleText}>
-              You play as <X size={18} color="#7B68EE" style={styles.inlineIcon} /> and your goal is to connect 3 marks in a row
+              You play as <X size={getResponsiveIconSize(18, 24)} color="#7B68EE" style={styles.inlineIcon} /> and your goal is to connect 3 marks in a row
               (horizontal, vertical, or diagonal) to win.
             </Text>
           </View>
@@ -83,7 +84,7 @@ export default function SettingsScreen() {
           <View style={styles.rule}>
             <Text style={styles.ruleNumber}>2</Text>
             <Text style={styles.ruleText}>
-              The opponent plays as <Circle size={18} color="#FF6B6B" style={styles.inlineIcon} /> and follows the same rules.
+              The opponent plays as <Circle size={getResponsiveIconSize(18, 24)} color="#FF6B6B" style={styles.inlineIcon} /> and follows the same rules.
             </Text>
           </View>
           
@@ -133,7 +134,7 @@ const styles = StyleSheet.create({
     paddingTop: Platform.OS === 'web' ? 48 : 24,
   },
   title: {
-    fontSize: 28,
+    fontSize: getResponsiveFontSize(28, 36),
     fontWeight: 'bold',
     color: 'white',
     marginBottom: 32,
@@ -146,7 +147,7 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   sectionTitle: {
-    fontSize: 20,
+    fontSize: getResponsiveFontSize(20, 26),
     fontWeight: '600',
     color: 'white',
     marginBottom: 16,
@@ -159,7 +160,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   settingLabel: {
-    fontSize: 16,
+    fontSize: getResponsiveFontSize(16, 20),
     color: 'white',
     fontFamily: 'Poppins-Regular',
   },
@@ -171,6 +172,7 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     marginTop: 8,
+    fontSize: getResponsiveFontSize(14, 18),
     fontFamily: 'Poppins-Medium',
   },
   rule: {
@@ -192,10 +194,10 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Bold',
   },
   ruleText: {
-    fontSize: 16,
+    fontSize: getResponsiveFontSize(16, 20),
     color: 'white',
     flex: 1,
-    lineHeight: 24,
+    lineHeight: getResponsiveFontSize(24, 28),
     fontFamily: 'Poppins-Regular',
   },
   inlineIcon: {
