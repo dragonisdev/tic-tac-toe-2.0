@@ -14,4 +14,5 @@ export interface GameContextType {
   winningLine: number[] | null;
   resetGame: () => void;
   isOverTheBoard: boolean;
+  isAITurning: boolean;
 }

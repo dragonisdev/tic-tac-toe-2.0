@@ -27,6 +27,7 @@ export function GameProvider({ children, isOverTheBoard = false }: GameProviderP
   const [aiScore, setAiScore] = useState(0);
   const [gameState, setGameState] = useState<GameState>('playing');
   const [winningLine, setWinningLine] = useState<number[] | null>(null);
+  const [isAITurning, setIsAITurning] = useState(false);
   const { playSound, aiDifficulty } = useSettings();
   
   const resetGame = () => {
@@ -39,7 +40,7 @@ export function GameProvider({ children, isOverTheBoard = false }: GameProviderP
   };
   
   const handleCellPress = async (index: number) => {
-    if (board[index] !== null || gameState !== 'playing') return;
+    if (board[index] !== null || gameState !== 'playing' || isAITurning) return;
     
     const newBoard = [...board];
     const currentPlayer = isOverTheBoard ? (playerTurn ? 'X' : 'O') : 'X';
@@ -95,6 +96,7 @@ export function GameProvider({ children, isOverTheBoard = false }: GameProviderP
       setPlayerTurn(!playerTurn);
     } else {
       setPlayerTurn(false);
+      setIsAITurning(true);
       setTimeout(() => {
         makeAIMove(newBoard, newCurrentMoves, aiMoves);
       }, 500);
@@ -140,8 +142,10 @@ export function GameProvider({ children, isOverTheBoard = false }: GameProviderP
       }
       
       setPlayerTurn(true);
+      setIsAITurning(false);
     } else {
       setPlayerTurn(true);
+      setIsAITurning(false);
     }
   };
   
@@ -158,7 +162,8 @@ export function GameProvider({ children, isOverTheBoard = false }: GameProviderP
         gameState,
         winningLine,
         resetGame,
-        isOverTheBoard
+        isOverTheBoard,
+        isAITurning
       }}
     >
       {children}

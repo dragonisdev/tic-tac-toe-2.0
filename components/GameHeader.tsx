@@ -8,7 +8,7 @@ export default function GameHeader() {
   const { playerScore, aiScore, isOverTheBoard } = useGame();
   
   const getGameModeText = () => {
-    return isOverTheBoard ? 'Over the Board Mode' : 'AI Opponent Mode';
+    return isOverTheBoard ? 'Over the Board' : 'AI Opponent';
   };
   
   return (
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 24,
-    paddingTop: 10,
+    paddingTop: 14,
   },
   title: {
     fontSize: getResponsiveFontSize(28, 36),

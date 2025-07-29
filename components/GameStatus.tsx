@@ -12,7 +12,7 @@ import { useGame } from '@/contexts/GameContext';
 import { getResponsiveFontSize, getResponsiveIconSize } from '@/utils/responsiveText';
 
 export default function GameStatus() {
-  const { playerTurn, playerMoves, aiMoves, gameState, winningLine, isOverTheBoard } = useGame();
+  const { playerTurn, playerMoves, aiMoves, gameState, winningLine, isOverTheBoard, isAITurning } = useGame();
   const scaleAnim = useSharedValue(1);
   const winScale = useSharedValue(1);
   
@@ -92,7 +92,7 @@ export default function GameStatus() {
           <Text style={styles.turnText}>
             {isOverTheBoard 
               ? (playerTurn ? 'Player X Turn' : 'Player O Turn')
-              : (playerTurn ? 'Your Turn' : 'AI Thinking...')}
+              : (playerTurn ? 'Your Turn' : (isAITurning ? 'AI Thinking...' : 'AI Turn'))}
           </Text>
         </Animated.View>
         

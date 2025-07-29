@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255, 255, 255, 0.08)',
     borderRadius: 20,
     flexDirection: 'row',
-    flexWrap: 'wrap',
+    flexWrap: 'rwrap',
     padding: 8,
     position: 'relative',
     borderWidth: 1,
