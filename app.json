@@ -26,8 +26,9 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#1E293B"
       },
-      "package": "com.dragonisdev.tictactoe2",
-      "versionCode": 1
+      "package": "com.dragonisdev.tictactoe",
+      "versionCode": 1,
+      "permissions": []
     },
     "web": {
       "bundler": "metro",
