@@ -30,6 +30,17 @@ export function GameProvider({ children, isOverTheBoard = false }: GameProviderP
   const [isAITurning, setIsAITurning] = useState(false);
   const { playSound, aiDifficulty } = useSettings();
   
+  // Ensure game state is properly initialized
+  useEffect(() => {
+    // Reset any stuck states when component mounts
+    if (isAITurning) {
+      setIsAITurning(false);
+    }
+    if (gameState !== 'playing') {
+      setGameState('playing');
+    }
+  }, []);
+  
   const resetGame = () => {
     setBoard(Array(9).fill(null));
     setPlayerMoves([]);
@@ -132,6 +143,7 @@ export function GameProvider({ children, isOverTheBoard = false }: GameProviderP
         setGameState('aiWin');
         setAiScore(prev => prev + 1);
         setWinningLine(aiWinResult);
+        setIsAITurning(false);
         await playSound('win');
         
         setTimeout(() => {

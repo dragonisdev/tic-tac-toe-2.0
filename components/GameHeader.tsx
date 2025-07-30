@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 24,
-    paddingTop: 14,
+    paddingTop: 24,
   },
   title: {
     fontSize: getResponsiveFontSize(28, 36),

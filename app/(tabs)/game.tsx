@@ -30,6 +30,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     justifyContent: 'space-between',
-    paddingTop: Platform.OS === 'web' ? 48 : 0
+    paddingTop: Platform.OS === 'web' ? 48 : 16
   },
 });

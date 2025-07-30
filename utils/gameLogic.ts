@@ -23,6 +23,7 @@ export function checkWinner(board: BoardState, player: CellValue): number[] | nu
 }
 
 export function getAIMove(board: BoardState, playerMoves: number[], difficulty: number = 1): number | null {
+  console.log('AI difficulty:', difficulty);
   const emptyCells = board.map((cell, index) => cell === null ? index : -1).filter(index => index !== -1);
   
   if (emptyCells.length === 0) {
@@ -34,39 +35,56 @@ export function getAIMove(board: BoardState, playerMoves: number[], difficulty: 
     return emptyCells[Math.floor(Math.random() * emptyCells.length)];
   }
   
-  // Medium and Hard modes
-  const priorities = [];
+  // Medium mode: Basic strategy (block wins, prefer center)
+  if (difficulty === 1) {
+    // First priority: Block player from winning
+    const blockingMove = findWinningMove(board, 'X');
+    if (blockingMove !== null) {
+      return blockingMove;
+    }
+    
+    // Second priority: Center
+    if (board[4] === null) {
+      return 4;
+    }
+    
+    // Third priority: Random move
+    return emptyCells[Math.floor(Math.random() * emptyCells.length)];
+  }
   
-  // First priority: Try to win (Hard mode only)
+  // Hard mode: Advanced strategy
   if (difficulty === 2) {
+    // First priority: Try to win
     const winningMove = findWinningMove(board, 'O');
     if (winningMove !== null) {
       return winningMove;
     }
-  }
-  
-  // Second priority: Block player from winning
-  const blockingMove = findWinningMove(board, 'X');
-  if (blockingMove !== null) {
-    return blockingMove;
-  }
-  
-  // Third priority: Center (Medium and Hard)
-  if (board[4] === null) {
-    return 4;
-  }
-  
-  // Fourth priority: Corners (Hard mode prefers corners)
-  const corners = [0, 2, 6, 8].filter(index => board[index] === null);
-  if (corners.length > 0) {
-    if (difficulty === 2) {
-      return corners[0]; // More strategic in hard mode
-    } else {
-      return corners[Math.floor(Math.random() * corners.length)];
+    
+    // Second priority: Block player from winning
+    const blockingMove = findWinningMove(board, 'X');
+    if (blockingMove !== null) {
+      return blockingMove;
+    }
+    
+    // Third priority: Center
+    if (board[4] === null) {
+      return 4;
+    }
+    
+    // Fourth priority: Corners (strategic positions)
+    const corners = [0, 2, 6, 8].filter(index => board[index] === null);
+    if (corners.length > 0) {
+      return corners[0];
+    }
+    
+    // Fifth priority: Edges
+    const edges = [1, 3, 5, 7].filter(index => board[index] === null);
+    if (edges.length > 0) {
+      return edges[0];
     }
   }
   
-  // Fifth priority: Any available cell
+  // Fallback: Random move
   return emptyCells[Math.floor(Math.random() * emptyCells.length)];
 }
 
